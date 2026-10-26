@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f5ec" />
+  <meta name="description" content="Florida Transmissões — sua companhia suave em todas as horas. Uma rádio fictícia para uma experiência narrativa ARG." />
+  <title>Florida Transmissões — 88.5 FM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    :root{
+      --paper:#f8f5ec; --paper-2:#f0ebde; --surface:#fffdf8; --surface-2:#f8f6ef;
+      --ink:#26332c; --muted:#68766a; --line:rgba(87,112,88,.18); --sage:#788f78; --sage-deep:#4d684f;
+      --sage-pale:#e4ebe0; --rose:#d99fa6; --rose-pale:#f8e9e9; --gold:#c49c50; --shadow:0 18px 55px rgba(40,56,43,.09);
+      --radius:24px; --header-h:78px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+    body.dark-theme{--paper:#161c17;--paper-2:#202820;--surface:#1d261e;--surface-2:#242e25;--ink:#edf0e6;--muted:#a8b4a5;--line:rgba(183,204,177,.17);--sage:#9cb49a;--sage-deep:#b8d0b4;--sage-pale:#2c3b2d;--rose:#d9a2aa;--rose-pale:#3b2a2d;--gold:#e1c17f;--shadow:0 18px 55px rgba(0,0,0,.24)}
+    button,input,textarea,select{font:inherit} button,a{-webkit-tap-highlight-color:transparent} button{cursor:pointer} a{color:inherit;text-decoration:none} button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid rgba(120,143,120,.45);outline-offset:3px}
+    ::selection{background:var(--sage-pale);color:var(--ink)}
+    .mono{font-family:'DM Mono',monospace}.display{font-family:'Playfair Display',serif}.muted{color:var(--muted)}
+    .container{width:min(1160px,calc(100% - 40px));margin-inline:auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--sage-deep)}
+    .eyebrow::before{content:'';width:20px;height:1px;background:currentColor;display:block}
+    .section-heading{max-width:700px;margin:0 auto 34px;text-align:center}.section-heading h2{font:600 clamp(2rem,4vw,3rem)/1.13 'Playfair Display',serif;letter-spacing:-.035em;margin:10px 0 12px}.section-heading p{max-width:560px;margin:0 auto;color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;border-radius:999px;padding:12px 19px;font-size:.88rem;font-weight:700;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s;min-height:44px}
+    .btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}.btn-primary{background:var(--sage-deep);color:#fff;box-shadow:0 8px 20px rgba(77,104,79,.18)}.btn-primary:hover{background:var(--sage);color:#fff}.btn-soft{background:var(--sage-pale);color:var(--sage-deep);border-color:var(--line)}.btn-soft:hover{background:var(--surface-2)}.btn-plain{background:var(--surface);border-color:var(--line);color:var(--ink)}.btn-plain:hover{border-color:var(--sage)}.btn-danger{background:#f8e4e4;color:#963f48;border-color:#edc9cc}.btn-small{padding:8px 12px;min-height:36px;font-size:.78rem}.icon-btn{width:42px;height:42px;display:inline-grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);transition:.2s}.icon-btn:hover{border-color:var(--sage);background:var(--sage-pale)}
+    .site-header{position:sticky;top:0;z-index:50;height:var(--header-h);background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.header-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:44px;height:44px;border-radius:15px;background:var(--sage-pale);display:grid;place-items:center;color:var(--sage-deep);border:1px solid var(--line);font-size:1.08rem;flex-shrink:0}.brand-name{display:block;font:700 1.08rem/1.2 'Playfair Display',serif;letter-spacing:-.025em;white-space:nowrap}.brand-sub{display:flex;align-items:center;gap:7px;margin-top:4px;font:500 .62rem 'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.status-dot{width:7px;height:7px;background:#5a9b66;border-radius:50%;display:inline-block;box-shadow:0 0 0 4px rgba(90,155,102,.12)}
+    .desktop-nav{display:flex;align-items:center;gap:3px;padding:5px;border:1px solid var(--line);border-radius:999px;background:var(--surface-2)}.nav-link{padding:9px 13px;border-radius:999px;color:var(--muted);font-size:.78rem;font-weight:700;transition:.2s}.nav-link:hover,.nav-link.active{background:var(--sage-pale);color:var(--sage-deep)}.header-actions{display:flex;align-items:center;gap:9px}.user-pill{display:flex;align-items:center;gap:8px;max-width:160px;padding:7px 12px 7px 7px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:.78rem;font-weight:700}.avatar-mini{width:29px;height:29px;display:grid;place-items:center;border-radius:50%;background:var(--sage-pale);color:var(--sage-deep)}.mobile-menu-btn{display:none}.mobile-nav{display:none}
+    main{min-height:55vh;animation:pageIn .28s ease}@keyframes pageIn{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:none}}
+    .hero{position:relative;overflow:hidden;padding:76px 0 80px;background:radial-gradient(circle at 82% 22%,rgba(217,159,166,.18),transparent 29%),radial-gradient(circle at 8% 88%,rgba(120,143,120,.13),transparent 30%),var(--paper)}.hero:before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(120,143,120,.26) .75px,transparent .75px);background-size:25px 25px;mask-image:linear-gradient(90deg,black,transparent 75%);opacity:.44;pointer-events:none}.hero-grid{position:relative;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:65px}.hero-copy h1{font:600 clamp(3rem,5.8vw,5.35rem)/.99 'Playfair Display',serif;letter-spacing:-.055em;margin:19px 0 23px;max-width:670px}.hero-copy h1 em{font-weight:500;color:var(--sage-deep)}.hero-copy>p{font-size:1.05rem;color:var(--muted);max-width:590px;line-height:1.85;margin:0}.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.hero-note{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.76rem;margin-top:25px}.hero-note span{color:var(--sage-deep)}
+    .radio-card{position:relative;padding:26px;border:1px solid var(--line);border-radius:30px;background:color-mix(in srgb,var(--surface) 94%,transparent);box-shadow:var(--shadow);overflow:hidden}.radio-card:after{content:'';position:absolute;right:-75px;top:-90px;width:210px;height:210px;border-radius:50%;background:var(--rose-pale);filter:blur(10px);opacity:.8;pointer-events:none}.radio-card>*{position:relative;z-index:1}.radio-card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:19px;border-bottom:1px solid var(--line)}.radio-branding{display:flex;align-items:center;gap:12px}.radio-logo{width:44px;height:44px;border-radius:15px;background:var(--sage-pale);color:var(--sage-deep);display:grid;place-items:center;font-size:1.05rem}.radio-mini-title{font-weight:800;font-size:.9rem}.radio-mini-sub{color:var(--muted);font: .68rem 'DM Mono',monospace;margin-top:3px}.on-air{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:999px;background:#e6f3e5;color:#356e3e;font:700 .62rem 'DM Mono',monospace;letter-spacing:.06em;white-space:nowrap}.on-air .status-dot{width:6px;height:6px;box-shadow:none}.turntable{display:grid;grid-template-columns:132px 1fr;gap:19px;align-items:center;padding:23px 0}.record{width:132px;aspect-ratio:1;border-radius:50%;position:relative;background:repeating-radial-gradient(circle,#222722 0 2px,#313a31 2.7px 3.8px,#202520 4px 5px);box-shadow:0 11px 25px rgba(0,0,0,.22);animation:spin 7s linear infinite;animation-play-state:paused}.record.playing{animation-play-state:running}.record:before{content:'';position:absolute;inset:30%;border-radius:50%;background:linear-gradient(140deg,#d6b6a0,#9b6c63);border:5px solid #242a25}.record:after{content:'';position:absolute;width:6px;height:6px;left:calc(50% - 3px);top:calc(50% - 3px);border-radius:50%;background:#f2e6d1}@keyframes spin{to{transform:rotate(360deg)}}.track-eyebrow{font:500 .63rem 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-deep)}.track-title{font:600 1.42rem/1.15 'Playfair Display',serif;margin:7px 0 5px}.track-sub{font-size:.76rem;color:var(--muted);line-height:1.6}.wave{display:flex;align-items:center;gap:4px;height:22px;margin-top:12px}.wave span{height:5px;width:3px;background:var(--sage);border-radius:4px;opacity:.7}.wave.active span{animation:wave .75s ease-in-out infinite alternate}.wave span:nth-child(2n){animation-delay:.16s}.wave span:nth-child(3n){animation-delay:.31s}.wave span:nth-child(4n){animation-delay:.43s}@keyframes wave{to{height:18px;opacity:1}}.player-controls{display:flex;align-items:center;gap:11px}.play-btn{width:52px;height:52px;border:0;background:var(--sage-deep);color:white;border-radius:50%;display:grid;place-items:center;font-size:1rem;box-shadow:0 8px 20px rgba(77,104,79,.23);transition:.2s;flex-shrink:0}.play-btn:hover{transform:scale(1.05);background:var(--sage)}.player-controls .volume{flex:1;min-width:0}.volume-row{display:flex;align-items:center;gap:9px;font-size:.76rem;color:var(--muted)}input[type=range]{accent-color:var(--sage-deep);width:100%;cursor:pointer}.player-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:17px;border-top:1px solid var(--line);font: .64rem 'DM Mono',monospace;color:var(--muted)}.player-foot button{background:transparent;border:0;color:var(--sage-deep);font:inherit;text-decoration:underline;text-underline-offset:3px}
+    .section{padding:74px 0}.section.alt{background:var(--paper-2)}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.feature-card,.program-card,.panel,.form-card,.info-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 26px rgba(35,50,38,.035)}.feature-card{padding:25px;transition:transform .22s,box-shadow .22s}.feature-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.feature-icon{width:46px;height:46px;border-radius:15px;background:var(--sage-pale);color:var(--sage-deep);display:grid;place-items:center;font-size:1.05rem;margin-bottom:18px}.feature-card:nth-child(2) .feature-icon{background:var(--rose-pale);color:#a86c73}.feature-card:nth-child(3) .feature-icon{background:#f5edcf;color:#94712e}.feature-card h3{margin:0 0 8px;font:600 1.28rem 'Playfair Display',serif}.feature-card p{font-size:.87rem;color:var(--muted);line-height:1.8;margin:0 0 18px}.text-link{display:inline-flex;align-items:center;gap:7px;color:var(--sage-deep);font-size:.8rem;font-weight:800}.text-link:hover{gap:11px}
+    .quote-band{position:relative;overflow:hidden;border-radius:30px;background:var(--sage-deep);color:#fff;padding:43px 48px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}.quote-band:after{content:'“';position:absolute;right:19%;top:-105px;font:19rem 'Playfair Display',serif;color:rgba(255,255,255,.08)}.quote-band p{max-width:740px;font:italic 500 clamp(1.45rem,3vw,2.1rem)/1.35 'Playfair Display',serif;margin:0;position:relative;z-index:1}.quote-band .mono{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:#d6e2d4;position:relative;z-index:1}
+    .page-wrap{padding:55px 0 80px}.page-top{margin-bottom:30px}.page-top h1{font:600 clamp(2.3rem,5vw,3.8rem)/1.08 'Playfair Display',serif;letter-spacing:-.04em;margin:12px 0}.page-top p{max-width:660px;color:var(--muted);margin:0;line-height:1.8}.page-center{text-align:center}.page-center p{margin-inline:auto}.schedule-tools{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}.search-box{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:0 15px;min-width:min(100%,330px)}.search-box input{border:0;outline:0;background:transparent;color:var(--ink);width:100%;padding:11px 0;font-size:.82rem}.filter-select{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:11px 15px;border-radius:999px;font-size:.82rem}.schedule-list{display:grid;gap:12px}.program-card{display:grid;grid-template-columns:94px 1fr auto;align-items:start;gap:20px;padding:22px 24px;transition:border .2s,transform .2s}.program-card:hover{border-color:color-mix(in srgb,var(--sage) 65%,var(--line));transform:translateY(-1px)}.program-time{padding:10px 8px;border-radius:14px;background:var(--sage-pale);color:var(--sage-deep);font:500 1rem 'DM Mono',monospace;text-align:center}.program-card h3{font:600 1.3rem 'Playfair Display',serif;margin:0 0 5px}.program-card p{font-size:.85rem;color:var(--muted);margin:0;line-height:1.75}.program-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.tag{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;background:var(--surface-2);color:var(--muted);border:1px solid var(--line);border-radius:999px;font-size:.65rem;font-weight:700}.tag.current{background:#e5f1e1;color:#3d7645;border-color:#c8e0c3}.program-actions{display:flex;flex-direction:column;gap:8px;align-items:stretch}.favorite-btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:7px 10px;font-size:.72rem}.favorite-btn.favorited{color:#b46f79;background:var(--rose-pale);border-color:color-mix(in srgb,var(--rose) 55%,var(--line))}
+    .two-col{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}.form-card{padding:28px}.form-card h2,.panel h2,.info-card h2{font:600 1.55rem 'Playfair Display',serif;margin:0 0 6px}.form-intro{font-size:.84rem;color:var(--muted);margin:0 0 22px;line-height:1.75}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}.field label{font-size:.72rem;font-weight:800;color:var(--muted);letter-spacing:.045em}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:13px;background:var(--surface-2);color:var(--ink);padding:12px 13px;font-size:.86rem;transition:border .2s,box-shadow .2s}.field textarea{resize:vertical;min-height:110px}.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(120,143,120,.12)}.field small{font-size:.69rem;color:var(--muted)}.form-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}.form-error{background:#ffeded;color:#9b4048;border:1px solid #f0c7ca;border-radius:11px;padding:10px 12px;font-size:.78rem;margin-bottom:15px}.info-card{padding:23px;margin-bottom:14px}.info-card .bullet-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:13px;background:var(--sage-pale);color:var(--sage-deep);margin-bottom:13px}.info-card p{font-size:.83rem;line-height:1.8;color:var(--muted);margin:0}.info-card h3{font-size:.93rem;margin:0 0 8px}.recent-list{display:grid;gap:10px}.recent-item{padding:13px 0;border-bottom:1px solid var(--line)}.recent-item:last-child{border:0}.recent-item strong{display:block;font-size:.83rem}.recent-item span{display:block;color:var(--muted);font-size:.72rem;margin-top:3px}.empty-state{text-align:center;padding:40px 20px;color:var(--muted);border:1px dashed var(--line);border-radius:18px}.empty-state i{font-size:1.7rem;color:var(--sage);margin-bottom:10px}.empty-state strong{display:block;color:var(--ink);margin-bottom:5px}
+    .auth-shell{max-width:500px;margin:0 auto}.auth-card{padding:32px}.auth-mark{width:56px;height:56px;border-radius:19px;background:var(--sage-pale);color:var(--sage-deep);display:grid;place-items:center;font-size:1.25rem;margin:0 auto 15px}.auth-card h1{text-align:center;font:600 2rem 'Playfair Display',serif;margin:0 0 7px}.auth-card .subtitle{text-align:center;color:var(--muted);font-size:.82rem;margin:0 0 24px}.auth-switch{text-align:center;font-size:.8rem;color:var(--muted);margin-top:18px}.auth-switch a{color:var(--sage-deep);font-weight:800;text-decoration:underline;text-underline-offset:3px}.demo-warning{display:flex;gap:10px;padding:12px;border-radius:13px;background:var(--paper-2);border:1px solid var(--line);font-size:.72rem;color:var(--muted);margin-top:18px;line-height:1.6}.profile-head{display:flex;align-items:center;gap:17px;padding:24px}.avatar-large{width:66px;height:66px;border-radius:22px;background:var(--sage-pale);color:var(--sage-deep);font-size:1.5rem;display:grid;place-items:center;flex-shrink:0}.profile-head h2{font:600 1.6rem 'Playfair Display',serif;margin:0}.profile-head p{font-size:.78rem;color:var(--muted);margin:4px 0 0}.profile-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}.panel{padding:24px;margin-top:17px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.panel-head h2{margin:0}.request-row{display:grid;grid-template-columns:1fr auto;gap:15px;padding:16px 0;border-bottom:1px solid var(--line)}.request-row:last-child{border-bottom:0}.request-row strong{font-size:.9rem}.request-row p{font-size:.76rem;color:var(--muted);margin:3px 0 0}.status-label{height:max-content;border-radius:999px;padding:5px 9px;background:var(--sage-pale);color:var(--sage-deep);font-size:.68rem;font-weight:800}.status-label.atendido{background:#e5f1e1;color:#3d7645}.status-label.cancelado{background:#f7e5e5;color:#954b52}
+    .about-story{display:grid;grid-template-columns:.8fr 1.2fr;gap:25px;align-items:stretch}.about-art{min-height:390px;border-radius:26px;background:radial-gradient(circle at 50% 30%,rgba(238,205,171,.4),transparent 30%),linear-gradient(145deg,#789078,#425c49 75%);position:relative;overflow:hidden;display:grid;place-items:center;color:#f7f2e5}.about-art:before,.about-art:after{content:'';position:absolute;border:1px solid rgba(255,255,255,.25);border-radius:50%;width:270px;height:270px}.about-art:after{width:340px;height:340px}.about-art i{font-size:5rem;position:relative;z-index:1;filter:drop-shadow(0 10px 18px rgba(0,0,0,.2))}.about-art small{position:absolute;bottom:20px;left:22px;font: .65rem 'DM Mono',monospace;letter-spacing:.12em}.about-copy{padding:31px;background:var(--surface);border:1px solid var(--line);border-radius:26px}.about-copy p{font-size:.9rem;line-height:1.95;color:var(--muted)}.about-copy h2{font:600 2rem 'Playfair Display',serif;margin:0}.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.stat-box{background:var(--surface-2);border:1px solid var(--line);border-radius:17px;padding:15px}.stat-box strong{display:block;font:600 1.35rem 'Playfair Display',serif;color:var(--sage-deep)}.stat-box span{font-size:.68rem;color:var(--muted)}
+    .contact-line{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.contact-line:last-child{border:0}.contact-line i{width:36px;height:36px;border-radius:12px;background:var(--sage-pale);color:var(--sage-deep);display:grid;place-items:center}.contact-line strong{display:block;font-size:.83rem}.contact-line span{display:block;font-size:.74rem;color:var(--muted)}
+    .secret-body{background:#070a08;color:#bbc7b9;font-family:'DM Mono',monospace;min-height:100vh}.secret-screen{min-height:100vh;background:radial-gradient(ellipse at center,rgba(9,50,26,.28),transparent 55%),#070a08;position:relative;overflow:hidden;display:grid;place-items:center;padding:35px 18px}.secret-screen:after{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(transparent 0 3px,rgba(0,0,0,.22) 4px 5px);opacity:.45}.secret-panel{width:min(720px,100%);position:relative;z-index:1;background:rgba(10,15,11,.92);border:1px solid #1a3321;padding:clamp(22px,5vw,42px);box-shadow:0 0 80px rgba(0,255,95,.06);text-align:center}.secret-kicker{font-size:.65rem;letter-spacing:.17em;color:#4a9462}.secret-panel h1{font-size:clamp(1.5rem,4vw,2.6rem);color:#edf3e8;font-weight:500;letter-spacing:.04em;margin:29px 0 10px}.secret-panel .subline{font-size:.67rem;letter-spacing:.1em;color:#687d6b}.secret-record{margin-top:28px;border:1px solid #1b2a1d;background:#060806;padding:20px;text-align:left;font-size:.76rem;line-height:1.9;color:#819184}.secret-record b{color:#54bc73;display:block;font-size:.65rem;letter-spacing:.1em;margin-bottom:10px}.secret-buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px}.secret-btn{padding:11px 14px;background:#0e2013;border:1px solid #275537;color:#71cb89;border-radius:7px;font:500 .73rem 'DM Mono',monospace}.secret-btn:hover{background:#17351f}.glitch-label{position:absolute;z-index:1;color:#52ba70;border:1px dashed #245c35;background:#061009;padding:6px 8px;font-size:.62rem;letter-spacing:.06em;opacity:.85}.glitch-a{left:5%;top:6%}.glitch-b{right:5%;bottom:6%}    .secret-screen{min-height:100vh;background:#050605;display:grid;place-items:center;padding:24px;position:relative;}
+    .secret-screen:after{display:none!important}
+    .secret-message{margin:0;color:#e8e8e5;font:500 clamp(1.35rem,4vw,2.25rem)/1.3 'DM Mono',monospace;text-align:center;letter-spacing:.02em;}
+    .secret-clue{max-width:440px;margin:22px auto 0;color:#627064;font:400 .7rem/1.9 'DM Mono',monospace;text-align:center;letter-spacing:.025em;}
+    .program-detail-title-link{color:inherit;text-decoration:none;cursor:pointer;}
+    .program-detail-title-link:hover,.program-detail-title-link:focus-visible{color:var(--sage-deep);text-decoration:underline;text-underline-offset:4px;}
+    .arg-game-backdrop{position:fixed;inset:0;z-index:250;background:rgba(3,7,4,.82);backdrop-filter:blur(10px);display:grid;place-items:center;padding:16px;}
+    .arg-terminal{width:min(610px,100%);max-height:min(88vh,820px);overflow:auto;background:#08100a;border:1px solid #294b30;border-radius:14px;color:#a9d7b0;padding:clamp(19px,4vw,30px);font-family:'DM Mono',monospace;box-shadow:0 28px 100px #000b;}
+    .arg-terminal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;border-bottom:1px solid #1c3421;padding-bottom:16px;margin-bottom:20px;}
+    .arg-kicker{font-size:.61rem;letter-spacing:.16em;color:#5a9b68;text-transform:uppercase;}
+    .arg-terminal h2{margin:6px 0;color:#e1f0e2;font-size:1rem;letter-spacing:.08em;}
+    .arg-terminal p{font-size:.72rem;line-height:1.9;color:#8ca792;}
+    .arg-packets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:21px 0;}
+    .arg-packet{min-height:66px;background:#0b1c10;border:1px solid #294b30;border-radius:8px;color:#b8e4bd;font:700 .9rem 'DM Mono',monospace;transition:.15s;}
+    .arg-packet:hover{background:#15331c;border-color:#63b675;}
+    .arg-packet.used{background:#1f3f27;color:#547c5c;border-color:#23442a;opacity:.65;}
+    .arg-status{min-height:42px;padding:11px 12px;background:#030805;border:1px solid #1a2b1d;color:#739a7b;font-size:.68rem;line-height:1.7;}
+    .arg-status.error{color:#e4a09b;border-color:#5a2929;}
+    .arg-code-box{padding:15px;background:#030805;border:1px solid #1a2b1d;font-size:.8rem;line-height:2;color:#bedec1;}
+    .arg-bits{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;margin:16px 0 10px;}
+    .arg-bit{min-height:54px;background:#0b1c10;border:1px solid #294b30;border-radius:7px;color:#a8c9ac;font:700 1.1rem 'DM Mono',monospace;}
+    .arg-bit.is-one{background:#21472a;color:#e0ffe4;border-color:#69bd7a;box-shadow:inset 0 0 0 1px #3b7c49;}
+    .arg-bits-display{text-align:center;letter-spacing:.34em;font-size:1.05rem;color:#e1f0e2;margin:14px 0;}
+    .arg-result{margin-top:16px;padding:16px;border:1px solid #3c8750;background:#0b1c10;border-radius:9px;}
+    .arg-result strong{display:block;color:#8add9a;font-size:.65rem;letter-spacing:.14em;margin-bottom:8px;}
+    .arg-credential{font-size:1rem;overflow-wrap:anywhere;color:#f0fff0;background:#030805;padding:11px;border-radius:6px;border:1px dashed #3c8750;}
+    .arg-game-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px;}
+    .arg-game-actions .btn{font-size:.72rem;}
+    @media(max-width:480px){.arg-packets{gap:6px}.arg-packet{font-size:.76rem;min-height:58px}.arg-bits{gap:4px}.arg-bit{min-height:47px;font-size:.95rem}.arg-bits-display{letter-spacing:.2em}}
+.lab-body{background:#080d09;color:#68d18b;font-family:'DM Mono',monospace;min-height:100vh}.lab-wrap{min-height:100vh;padding:30px 0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,0,0,.15) 4px 5px),#080d09}.lab-card{background:#0e160f;border:1px solid #203923;border-radius:15px;padding:22px;transition:.2s}.lab-card:hover{border-color:#65b980;transform:translateY(-2px)}.lab-card h2{font-size:1rem;color:#eff7ed;margin:15px 0 6px}.lab-card p{font-size:.7rem;color:#64846b}.lab-head{display:flex;justify-content:space-between;gap:15px;align-items:center;border-bottom:1px solid #203923;padding-bottom:19px;margin-bottom:25px}.lab-head h1{color:#eef6eb;font-size:1.2rem;letter-spacing:.08em}.lab-tag{font-size:.62rem;border:1px solid #38533b;padding:5px 8px;background:#122315;border-radius:4px}
+    .site-footer{border-top:1px solid var(--line);background:var(--paper-2);padding:43px 0 28px;color:var(--muted)}.footer-grid{display:grid;grid-template-columns:1.3fr .7fr .8fr 1fr;gap:28px}.footer-brand{font:600 1.2rem 'Playfair Display',serif;color:var(--ink)}.footer-title{font-size:.78rem;font-weight:800;color:var(--ink);margin:0 0 14px}.footer-copy{font-size:.77rem;line-height:1.8;margin:11px 0}.footer-links{display:grid;gap:9px;font-size:.75rem}.footer-links a:hover{color:var(--sage-deep)}.footer-bottom{border-top:1px solid var(--line);margin-top:28px;padding-top:17px;display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:.68rem}.footer-bottom span:last-child{font-family:'DM Mono',monospace}
+    .toast-wrap{position:fixed;right:18px;bottom:18px;z-index:1000;display:grid;gap:10px;width:min(370px,calc(100vw - 36px));pointer-events:none}.toast{pointer-events:auto;display:flex;gap:11px;align-items:flex-start;padding:14px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:15px;animation:toastIn .25s ease}.toast-icon{color:var(--sage-deep);margin-top:2px}.toast.error .toast-icon{color:#b64d59}.toast strong{display:block;font-size:.78rem}.toast p{font-size:.72rem;line-height:1.5;color:var(--muted);margin:2px 0 0}@keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .modal-backdrop{position:fixed;inset:0;z-index:200;background:rgba(14,22,16,.55);backdrop-filter:blur(7px);display:grid;place-items:center;padding:18px}.modal{width:min(520px,100%);background:var(--surface);border:1px solid var(--line);border-radius:23px;padding:25px;box-shadow:0 30px 90px rgba(0,0,0,.25);animation:pageIn .2s ease}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.modal-head h2{font:600 1.5rem 'Playfair Display',serif;margin:0}.modal p{font-size:.81rem;color:var(--muted);line-height:1.75}.hidden{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:1000px){.desktop-nav{gap:0}.nav-link{padding:9px 10px;font-size:.72rem}.hero-grid{gap:35px}.brand-name{font-size:1rem}.header-actions .btn{padding:10px 13px}.footer-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:800px){:root{--header-h:70px}.container{width:min(100% - 30px,640px)}.desktop-nav,.header-login{display:none}.mobile-menu-btn{display:inline-grid}.mobile-nav{position:absolute;top:100%;left:0;right:0;display:none;gap:5px;padding:12px 15px 17px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 15px 30px rgba(0,0,0,.05)}.mobile-nav.open{display:grid}.mobile-nav .nav-link{padding:12px 15px;border-radius:12px}.mobile-nav-bottom{display:flex;gap:8px;padding:8px 5px 0}.header-inner{gap:10px}.hero{padding:50px 0 55px}.hero-grid{grid-template-columns:1fr;gap:34px}.hero-copy h1{max-width:600px;font-size:clamp(3rem,10vw,4.4rem)}.hero-copy>p{font-size:.95rem}.radio-card{max-width:560px;margin-inline:auto;width:100%}.section{padding:55px 0}.feature-grid{grid-template-columns:1fr;gap:12px}.feature-card{padding:22px}.quote-band{grid-template-columns:1fr;padding:30px 25px}.quote-band .btn{justify-self:start}.program-card{grid-template-columns:72px 1fr;gap:14px;padding:17px}.program-time{font-size:.83rem}.program-actions{grid-column:2;flex-direction:row;align-items:center}.two-col,.about-story{grid-template-columns:1fr}.about-art{min-height:250px}.page-wrap{padding:42px 0 60px}.footer-grid{grid-template-columns:1fr 1fr;gap:25px}.profile-head{align-items:flex-start;flex-wrap:wrap}.profile-actions{width:100%;margin-left:83px}.turntable{grid-template-columns:110px 1fr}.record{width:110px}}
+    @media(max-width:480px){.container{width:calc(100% - 26px)}.brand-mark{width:39px;height:39px;border-radius:13px}.brand-name{font-size:.9rem}.brand-sub{font-size:.54rem;letter-spacing:.06em}.header-actions{gap:5px}.icon-btn{width:38px;height:38px}.hero-copy h1{font-size:2.85rem}.hero-cta .btn{width:100%}.radio-card{padding:19px;border-radius:24px}.turntable{grid-template-columns:91px 1fr;gap:13px}.record{width:91px}.track-title{font-size:1.15rem}.track-sub{font-size:.69rem}.on-air{font-size:.54rem;padding:5px 7px}.player-controls{gap:9px}.play-btn{width:47px;height:47px}.player-foot{font-size:.56rem}.field-grid{grid-template-columns:1fr;gap:0}.form-card,.auth-card{padding:22px}.schedule-tools{align-items:stretch}.search-box{min-width:100%}.filter-select{width:100%}.program-card{grid-template-columns:61px minmax(0,1fr);gap:10px;padding:14px}.program-card h3{font-size:1.1rem}.program-card p{font-size:.78rem}.program-time{padding:9px 4px;font-size:.75rem}.program-actions{grid-column:1/-1;justify-content:flex-end}.stats-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:22px}.footer-bottom{align-items:flex-start;flex-direction:column}.profile-actions{margin-left:0}.profile-head{gap:12px}.avatar-large{width:55px;height:55px;border-radius:18px}.profile-head h2{font-size:1.3rem}.lab-head{align-items:flex-start;flex-direction:column}.glitch-label{font-size:.52rem}.glitch-a{left:3%;top:3%}.glitch-b{right:3%;bottom:3%}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <div id="site-shell">
+    <header class="site-header" id="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#/" aria-label="Florida Transmissões — início">
+          <span class="brand-mark"><i class="fa-solid fa-leaf"></i></span>
+          <span><span class="brand-name">Florida Transmissões</span><span class="brand-sub"><i class="status-dot"></i> 88.5 FM · Sintonia suave</span></span>
+        </a>
+        <nav class="desktop-nav" aria-label="Navegação principal">
+          <a class="nav-link" data-route="/" href="#/">Início</a>
+          <a class="nav-link" data-route="/programacao" href="#/programacao">Programação</a>
+          <a class="nav-link" data-route="/pedidos" href="#/pedidos">Pedidos</a>
+          <a class="nav-link" data-route="/sobre" href="#/sobre">A emissora</a>
+          <a class="nav-link" data-route="/contato" href="#/contato">Contato</a>
+        </nav>
+        <div class="header-actions">
+          <button class="icon-btn" id="theme-toggle" type="button" title="Alternar tema" aria-label="Alternar tema"><i class="fa-solid fa-moon"></i></button>
+          <div id="auth-header-container"><a href="#/login" class="btn btn-primary btn-small header-login"><i class="fa-regular fa-user"></i> Entrar</a></div>
+          <button class="icon-btn mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false"><i class="fa-solid fa-bars" id="mobile-menu-icon"></i></button>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação móvel">
+        <a class="nav-link" data-route="/" href="#/">Início</a><a class="nav-link" data-route="/programacao" href="#/programacao">Programação</a><a class="nav-link" data-route="/pedidos" href="#/pedidos">Pedidos musicais</a><a class="nav-link" data-route="/sobre" href="#/sobre">A emissora</a><a class="nav-link" data-route="/contato" href="#/contato">Contato</a>
+        <div class="mobile-nav-bottom" id="mobile-auth-container"><a href="#/login" class="btn btn-primary" style="flex:1">Entrar na conta</a></div>
+      </nav>
+    </header>
+    <main id="app-content" tabindex="-1"></main>
+    <footer class="site-footer" id="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div><div class="brand"><span class="brand-mark"><i class="fa-solid fa-leaf"></i></span><span class="footer-brand">Florida Transmissões</span></div><p class="footer-copy">Uma emissora comunitária fictícia dedicada à música brasileira, à calma e às histórias que merecem ser ouvidas até o fim.</p><span class="mono" style="font-size:.65rem">FREQ. 88.5 MHz · CANAL ANALÓGICO</span></div>
+          <div><h3 class="footer-title">Explore</h3><div class="footer-links"><a href="#/programacao">Grade de programação</a><a href="#/pedidos">Pedir uma música</a><a href="#/sobre">Nossa história</a><a href="#/contato">Fale conosco</a></div></div>
+          <div><h3 class="footer-title">No dial</h3><div class="footer-links"><a href="#/programacao">Café com Música</a><a href="#/programacao">Vozes do Bairro</a><a href="#/programacao">Clássicos do Rádio</a><a href="#/programacao">Boa Noite, Florida</a></div></div>
+          <div><h3 class="footer-title">Estúdio & transmissão</h3><p class="footer-copy" style="margin-top:0">Av. das Camélias, nº 88<br>Jardim — Florida, SP<br><span class="muted">Endereço inteiramente fictício.</span></p><p class="footer-copy">Este site faz parte de um projeto de RPG/ARG.</p></div>
+        </div>
+        <div class="footer-bottom"><span>© <span id="footer-year">2026</span> Florida Transmissões. Ficção narrativa.</span><span>FEITO COM CALMA · TRANSMITINDO EM 88.5</span></div>
+      </div>
+    </footer>
+  </div>
+
+  <div id="toast-container" class="toast-wrap" aria-live="polite" aria-atomic="false"></div>
+  <audio id="stream-audio" preload="none" crossorigin="anonymous"></audio>
+  <div id="modal-root"></div>
+
+  <script>
+    (() => {
+      'use strict';
+      const STORAGE = {
+        users: 'florida_v2_users', current: 'florida_v2_current', pedidos: 'florida_v2_pedidos', contatos: 'florida_v2_contatos', favorites: 'florida_v2_favorites', theme: 'florida_v2_theme', stream: 'florida_v2_stream'
+      };
+      const $ = (sel, root = document) => root.querySelector(sel);
+      const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+      const appContent = $('#app-content');
+      const header = $('#site-header');
+      const footer = $('#site-footer');
+      const audioElement = $('#stream-audio');
+      let currentUser = loadJSON(STORAGE.current, null);
+      let isLabMode = sessionStorage.getItem('florida_v2_lab') === 'true';
+      let activeAudioMode = 'off'; // off | synth | stream
+      let audioContext = null, masterGain = null, noiseSource = null, oscillators = [], noiseFilter = null;
+      let streamUrl = localStorage.getItem(STORAGE.stream) || '';
+      let audioMuted = false;
+      let lastPublicRoute = '#/';
+      let argGameState = null;
+      let logoTapCount = 0, yearTapCount = 0, logoTapTimer = null, yearTapTimer = null;
+
+      const programs = [
+        { time:'06:00', end:'08:00', title:'Bom Dia, Florida', category:'Comunidade', icon:'fa-sun', desc:'Abertura do sinal diário, mensagens dos ouvintes e uma seleção de MPB e música de raiz para começar o dia sem pressa.', type:'music' },
+        { time:'08:00', end:'10:00', title:'Café com Música', category:'Acústico', icon:'fa-mug-hot', desc:'Violão, bossa nova, arranjos delicados e clássicos em vinil para acompanhar o café da manhã.', type:'music' },
+        { time:'10:00', end:'12:00', title:'Jardim das Frequências', category:'Paisagem sonora', icon:'fa-seedling', desc:'Uma seleção tranquila de sons da natureza, gravações de campo, paisagens sonoras e poesia para acompanhar a pausa da manhã.', type:'special', secret:true },
+        { time:'12:00', end:'14:00', title:'Meio-Dia Musical', category:'Notícias locais', icon:'fa-bell', desc:'Um boletim leve da comunidade acompanhado por relíquias do samba e clássicos da música brasileira.', type:'community' },
+        { time:'14:00', end:'16:00', title:'Histórias ao Ar', category:'Narrativa', icon:'fa-book-open', desc:'Crônicas enviadas por ouvintes, cartas antigas e contos que ganham vida com sonoplastia analógica.', type:'talk' },
+        { time:'16:00', end:'18:00', title:'Tarde Florida', category:'Pedidos musicais', icon:'fa-music', desc:'O espaço interativo da emissora. Pedidos de música, recados carinhosos e os sons escolhidos pela comunidade.', type:'music' },
+        { time:'18:00', end:'20:00', title:'Clássicos do Rádio', category:'Nostalgia', icon:'fa-compact-disc', desc:'Uma viagem pelas décadas de 70, 80 e 90, com curiosidades sobre a história da radiodifusão.', type:'music' },
+        { time:'20:00', end:'22:00', title:'Sessão das Flores', category:'Jazz & calma', icon:'fa-moon', desc:'Jazz suave, lo-fi acústico e trilhas instrumentais para desacelerar depois de um dia cheio.', type:'music' },
+        { time:'22:00', end:'00:00', title:'Boa Noite, Florida', category:'Encerramento', icon:'fa-cloud-moon', desc:'Poesias clássicas, chuva ao fundo e música ambiente até o encerramento do sinal diário. Uma antiga rotina sugere treze batidas no ano impresso ao pé da página.', type:'talk' }
+      ];
+
+      function loadJSON(key, fallback) {
+        try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : fallback; }
+        catch (_) { return fallback; }
+      }
+      function saveJSON(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+      function escapeHTML(value) {
+        return String(value ?? '').replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
+      }
+      function initials(name) {
+        return String(name || 'O').trim().split(/\s+/).slice(0, 2).map(part => part[0] || '').join('').toUpperCase() || 'O';
+      }
+      function toast(title, message, type = 'info') {
+        const wrap = $('#toast-container');
+        const node = document.createElement('div');
+        node.className = `toast ${type === 'error' ? 'error' : ''}`;
+        node.innerHTML = `<span class="toast-icon"><i class="fa-solid ${type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info'}"></i></span><div><strong>${escapeHTML(title)}</strong><p>${escapeHTML(message)}</p></div>`;
+        wrap.appendChild(node);
+        setTimeout(() => { node.style.opacity = '0'; node.style.transform = 'translateY(6px)'; setTimeout(() => node.remove(), 220); }, 4200);
+      }
+      function getUsers() { return loadJSON(STORAGE.users, []); }
+      function getPedidos() { return loadJSON(STORAGE.pedidos, []); }
+      function setCurrentUser(user) {
+        currentUser = user;
+        if (user) saveJSON(STORAGE.current, user); else localStorage.removeItem(STORAGE.current);
+        renderAuthHeader();
+      }
+      function renderAuthHeader() {
+        const desktop = $('#auth-header-container'), mobile = $('#mobile-auth-container');
+        if (currentUser) {
+          const name = escapeHTML(currentUser.name || currentUser.email || 'Ouvinte');
+          const pill = `<a href="#/perfil" class="user-pill" title="Abrir perfil"><span class="avatar-mini">${escapeHTML(initials(currentUser.name))}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</span></a>`;
+          desktop.innerHTML = pill;
+          mobile.innerHTML = `${pill}<button class="btn btn-plain btn-small" type="button" data-action="logout">Sair</button>`;
+        } else {
+          desktop.innerHTML = '<a href="#/login" class="btn btn-primary btn-small header-login"><i class="fa-regular fa-user"></i> Entrar</a>';
+          mobile.innerHTML = '<a href="#/login" class="btn btn-primary" style="flex:1">Entrar na conta</a><a href="#/cadastro" class="btn btn-plain" style="flex:1">Criar conta</a>';
+        }
+      }
+      function getCurrentProgram() {
+        const now = new Date(), mins = now.getHours() * 60 + now.getMinutes();
+        for (const p of programs) {
+          const [sh, sm] = p.time.split(':').map(Number), [eh, em] = p.end.split(':').map(Number);
+          const start = sh * 60 + sm, end = (eh === 0 && em === 0) ? 1440 : eh * 60 + em;
+          if (mins >= start && mins < end) return p;
+        }
+        return programs[0];
+      }
+      function getFavorites() { return loadJSON(STORAGE.favorites, []); }
+      function isFavorite(title) { return getFavorites().includes(title); }
+      function toggleFavorite(title) {
+        const list = getFavorites();
+        const was = list.includes(title);
+        saveJSON(STORAGE.favorites, was ? list.filter(x => x !== title) : [...list, title]);
+        $('#modal-root').innerHTML='';
+        toast(was ? 'Removido dos favoritos' : 'Adicionado aos favoritos', title, 'success');
+        const route = location.hash || '#/';
+        router(route, true);
+      }
+      function routeName() { return (location.hash || '#/').replace(/^#/, '') || '/'; }
+      function updateNav(route) {
+        const base = route.startsWith('/arquivo-restrito') || route === '/jardim-das-frequencias' ? '' : route;
+        $$('.nav-link[data-route]').forEach(a => a.classList.toggle('active', a.dataset.route === base));
+      }
+      function escapeAndParagraphs(text) { return escapeHTML(text).replace(/\n/g, '<br>'); }
+      function layoutPublic() {
+        document.body.className = localStorage.getItem(STORAGE.theme) === 'dark' ? 'dark-theme' : '';
+        $('#site-shell').classList.remove('hidden'); header.classList.remove('hidden'); footer.classList.remove('hidden');
+      }
+      function setPage(html) { appContent.innerHTML = html; appContent.focus({ preventScroll: true }); }
+      function emptyState(icon, title, description) { return `<div class="empty-state"><i class="fa-regular ${icon}"></i><strong>${escapeHTML(title)}</strong><span>${escapeHTML(description)}</span></div>`; }
+
+      function renderHome() {
+        const current = getCurrentProgram();
+        setPage(`
+          <section class="hero"><div class="container hero-grid">
+            <div class="hero-copy"><span class="eyebrow">Rádio comunitária · Florida, SP</span><h1>Sua companhia suave <em>em todas as horas.</em></h1><p>Uma frequência feita de músicas que acolhem, histórias que ficam e pequenos detalhes que fazem a cidade parecer mais perto. Sente-se. A sintonia é sua.</p>
+              <div class="hero-cta"><a href="#/programacao" class="btn btn-primary"><i class="fa-regular fa-calendar"></i> Explorar programação</a><a href="#/pedidos" class="btn btn-plain"><i class="fa-solid fa-music"></i> Pedir uma música</a></div>
+              <div class="hero-note"><span><i class="fa-solid fa-headphones"></i></span> Feche os olhos por um instante. O mundo pode esperar uma canção.</div>
+            </div>
+            <div class="radio-card" id="hero-radio-card">
+              <div class="radio-card-top"><div class="radio-branding"><span class="radio-logo"><i class="fa-solid fa-tower-broadcast"></i></span><div><div class="radio-mini-title">Sintonizador Florida</div><div class="radio-mini-sub">88.5 MHz · Analógico</div></div></div><span class="on-air"><i class="status-dot"></i> NO AR</span></div>
+              <div class="turntable"><div class="record" id="record-disc"></div><div><div class="track-eyebrow">Agora na frequência</div><h3 class="track-title" id="current-program-title">${escapeHTML(current.title)}</h3><div class="track-sub" id="current-program-sub">${escapeHTML(current.category)} · ${escapeHTML(current.time)}–${escapeHTML(current.end)}</div><div class="wave" id="sound-wave" aria-hidden="true">${Array.from({length:18},()=>'<span></span>').join('')}</div></div></div>
+              <div class="player-controls"><button class="play-btn" id="radio-play" type="button" aria-label="Iniciar rádio"><i class="fa-solid fa-play" id="radio-play-icon"></i></button><div class="volume"><div class="volume-row"><i class="fa-solid fa-volume-low"></i><input type="range" id="radio-volume" min="0" max="100" value="35" aria-label="Volume do rádio"><span id="volume-label">35%</span></div><div class="track-sub" id="radio-status" style="margin-top:5px">Sintonia pronta · clique para ouvir</div></div><button class="icon-btn" type="button" data-action="radio-settings" title="Configurar transmissão" aria-label="Configurar transmissão"><i class="fa-solid fa-sliders"></i></button></div>
+              <div class="player-foot"><span><i class="fa-solid fa-signal"></i> TRANSMISSÃO DE TESTE</span><button type="button" data-action="radio-settings">Configurar stream externo</button></div>
+            </div>
+          </div></section>
+          <section class="section"><div class="container"><div class="section-heading"><span class="eyebrow">Um lugar para respirar</span><h2>Mais que uma rádio. Um pedaço da cidade.</h2><p>Da primeira xícara de café à última luz acesa, a Florida acompanha o ritmo de quem chama este lugar de casa.</p></div>
+            <div class="feature-grid"><article class="feature-card"><div class="feature-icon"><i class="fa-solid fa-compact-disc"></i></div><h3>Um acervo com memória</h3><p>Vinil, MPB, bossa nova, samba e gravações que parecem guardar o cheiro de outra época.</p><a class="text-link" href="#/programacao">Descobrir a grade <i class="fa-solid fa-arrow-right"></i></a></article><article class="feature-card"><div class="feature-icon"><i class="fa-solid fa-comments"></i></div><h3>Vozes da comunidade</h3><p>Cartas, recados, poemas e histórias de gente real — porque toda cidade tem algo a dizer.</p><a class="text-link" href="#/pedidos">Participar da rádio <i class="fa-solid fa-arrow-right"></i></a></article><article class="feature-card"><div class="feature-icon"><i class="fa-solid fa-seedling"></i></div><h3>Uma frequência curiosa</h3><p>Alguns programas duram mais do que deveriam. Outros deixam uma sensação difícil de explicar.</p><a class="text-link" href="#/programacao">Sintonizar o dial <i class="fa-solid fa-arrow-right"></i></a></article></div>
+          </div></section>
+          <section class="section alt"><div class="container"><div class="quote-band"><div><p>“Há músicas que nos levam para casa. E há frequências que parecem saber onde você esteve.”</p><div class="mono" style="margin-top:15px">ANOTAÇÃO ENCONTRADA NO ESTÚDIO · S/D</div></div><a href="#/sobre" class="btn btn-plain"><i class="fa-solid fa-book-open"></i> Conhecer a emissora</a></div></div></section>
+          <section class="section" style="padding-top:55px"><div class="container"><div class="section-heading"><span class="eyebrow">No dial hoje</span><h2>Escolha o som do seu momento.</h2><p>A programação é organizada para acompanhar a cidade do amanhecer até a madrugada.</p></div><div class="feature-grid">${programs.filter(p=>['Café com Música','Histórias ao Ar','Sessão das Flores'].includes(p.title)).map(p=>`<article class="feature-card"><div class="feature-icon"><i class="fa-solid ${p.icon}"></i></div><div class="mono muted" style="font-size:.68rem;margin-bottom:8px">${p.time} — ${p.end}</div><h3>${escapeHTML(p.title)}</h3><p>${escapeHTML(p.desc)}</p><a class="text-link" href="#/programacao">Ver detalhes <i class="fa-solid fa-arrow-right"></i></a></article>`).join('')}</div></div></section>
+        `);
+        bindHomePlayer();
+      }
+
+      function renderProgramacao() {
+        const favs = getFavorites();
+        setPage(`<div class="container page-wrap"><div class="page-top"><span class="eyebrow">A grade da emissora</span><h1>Programação para cada hora.</h1><p>Encontre seu programa favorito, veja os horários e marque os que deseja acompanhar. A grade abaixo representa a programação fictícia da Florida Transmissões.</p></div>
+          <div class="schedule-tools"><label class="search-box"><i class="fa-solid fa-magnifying-glass muted"></i><input id="schedule-search" type="search" placeholder="Buscar por programa ou tema…" aria-label="Buscar programa"></label><select class="filter-select" id="schedule-filter" aria-label="Filtrar programação"><option value="all">Todos os programas</option><option value="favorites">Meus favoritos</option><option value="music">Música</option><option value="talk">Histórias e conversa</option><option value="special">Programas especiais</option></select></div>
+          <div class="schedule-list" id="schedule-list">${programs.map(p=>scheduleCard(p)).join('')}</div>
+          <div class="demo-warning" style="margin-top:20px"><i class="fa-solid fa-circle-info"></i><span>Os horários e programas pertencem ao universo ficcional do RPG. O player não está conectado a uma emissora real até que seja configurado um stream externo.</span></div>
+        </div>`);
+        const search = $('#schedule-search'), filter = $('#schedule-filter');
+        const update = () => {
+          const q = search.value.trim().toLocaleLowerCase('pt-BR'), f = filter.value, favorites = getFavorites();
+          const list = programs.filter(p => (!q || `${p.title} ${p.desc} ${p.category}`.toLocaleLowerCase('pt-BR').includes(q)) && (f === 'all' || (f === 'favorites' ? favorites.includes(p.title) : f === 'music' ? p.type === 'music' : f === 'talk' ? p.type === 'talk' || p.type === 'community' : f === 'special' ? p.type === 'special' : true)));
+          $('#schedule-list').innerHTML = list.length ? list.map(scheduleCard).join('') : emptyState('fa-calendar-xmark','Nenhum programa encontrado','Tente outro termo ou filtro.');
+        };
+        search.addEventListener('input', update); filter.addEventListener('change', update);
+      }
+      function scheduleCard(p) {
+        const now = getCurrentProgram().title === p.title;
+        const fav = isFavorite(p.title);
+        return `<article class="program-card"><div class="program-time">${p.time}</div><div><h3>${escapeHTML(p.title)}</h3><p>${escapeHTML(p.desc)}</p><div class="program-meta"><span class="tag ${now?'current':''}">${now?'<i class="fa-solid fa-circle-play"></i> No horário atual':`<i class="fa-regular fa-clock"></i> Até ${p.end}`}</span><span class="tag"><i class="fa-solid ${p.icon}"></i> ${escapeHTML(p.category)}</span></div></div><div class="program-actions"><button class="favorite-btn ${fav?'favorited':''}" type="button" data-action="favorite" data-title="${escapeHTML(p.title)}"><i class="${fav?'fa-solid':'fa-regular'} fa-heart"></i> ${fav?'Favoritado':'Favoritar'}</button><button class="btn btn-plain btn-small" type="button" data-action="program-info" data-title="${escapeHTML(p.title)}"><i class="fa-solid fa-circle-info"></i> Detalhes</button></div></article>`;
+      }
+
+      function renderPedidos() {
+        const recent = getPedidos().slice().sort((a,b)=>b.createdAt-a.createdAt).slice(0,3);
+        setPage(`<div class="container page-wrap"><div class="page-top"><span class="eyebrow">Interação ao vivo</span><h1>Uma música, uma história.</h1><p>Envie seu pedido para a produção da Florida. Você pode dedicar uma canção, deixar um recado ou sugerir um artista local. Os registros ficam salvos neste navegador.</p></div>
+          <div class="two-col"><section class="form-card"><h2>Faça seu pedido musical</h2><p class="form-intro">Preencha os campos abaixo. Os pedidos são simulados localmente neste protótipo.</p><form id="pedido-form" novalidate>
+            <div class="field"><label for="pedido-nome">SEU NOME OU APELIDO *</label><input id="pedido-nome" name="nome" maxlength="70" required value="${escapeHTML(currentUser?.name||'')}" placeholder="Como podemos chamar você?"></div>
+            <div class="field-grid"><div class="field"><label for="pedido-musica">NOME DA MÚSICA *</label><input id="pedido-musica" name="musica" maxlength="100" required placeholder="Ex.: Carinhoso"></div><div class="field"><label for="pedido-artista">ARTISTA OU BANDA *</label><input id="pedido-artista" name="artista" maxlength="100" required placeholder="Ex.: Pixinguinha"></div></div>
+            <div class="field"><label for="pedido-tipo">TIPO DE PEDIDO</label><select id="pedido-tipo" name="tipo"><option value="Música">Pedido musical</option><option value="Dedicatória">Oferecimento ou dedicatória</option><option value="Artista local">Sugestão de artista local</option></select></div>
+            <div class="field"><label for="pedido-mensagem">MENSAGEM OU DEDICATÓRIA</label><textarea id="pedido-mensagem" name="mensagem" maxlength="500" placeholder="Mande um abraço para alguém especial…"></textarea><small>Até 500 caracteres.</small></div>
+            <div id="pedido-error" class="form-error hidden" role="alert"></div><div class="form-actions"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar pedido</button><button class="btn btn-plain" type="reset">Limpar formulário</button></div>
+          </form></section><aside><div class="info-card"><div class="bullet-icon"><i class="fa-solid fa-heart"></i></div><h3>Feito por pessoas</h3><p>Na Florida, cada pedido é tratado como uma pequena história. A equipe fictícia da rádio analisa os recados antes de colocá-los na programação.</p></div><div class="info-card"><h3><i class="fa-solid fa-clock" style="color:var(--sage-deep);margin-right:7px"></i>Últimos pedidos neste navegador</h3><div class="recent-list">${recent.length?recent.map(p=>`<div class="recent-item"><strong>${escapeHTML(p.musica)} — ${escapeHTML(p.artista)}</strong><span>Pedido de ${escapeHTML(p.nome)} · ${formatDate(p.createdAt)}</span></div>`).join(''): '<div class="muted" style="font-size:.78rem;padding:10px 0">Ainda não há pedidos por aqui. O primeiro pode ser seu.</div>'}</div></div><div class="info-card"><div class="bullet-icon"><i class="fa-solid fa-shield-heart"></i></div><h3>Privacidade do protótipo</h3><p>As informações ficam somente no armazenamento local do navegador. Não são enviadas a uma equipe real ou a um servidor.</p></div></aside></div></div>`);
+        $('#pedido-form').addEventListener('submit', submitPedido);
+      }
+      function submitPedido(event) {
+        event.preventDefault();
+        const form = event.currentTarget, data = Object.fromEntries(new FormData(form).entries());
+        const error = $('#pedido-error');
+        if (!data.nome.trim() || !data.musica.trim() || !data.artista.trim()) { error.textContent='Preencha seu nome, o nome da música e o artista.'; error.classList.remove('hidden'); return; }
+        if (data.nome.trim().length < 2 || data.musica.trim().length < 2 || data.artista.trim().length < 2) { error.textContent='Confira os campos: use pelo menos dois caracteres.'; error.classList.remove('hidden'); return; }
+        const items = getPedidos();
+        items.push({ id: cryptoId(), nome:data.nome.trim(), musica:data.musica.trim(), artista:data.artista.trim(), tipo:data.tipo, mensagem:data.mensagem.trim(), status:'Recebido', createdAt:Date.now(), email:currentUser?.email || null });
+        saveJSON(STORAGE.pedidos, items);
+        toast('Pedido registrado!', 'Seu pedido foi salvo neste navegador.', 'success');
+        router('#/pedidos', true);
+      }
+      function formatDate(timestamp) {
+        try { return new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).format(new Date(timestamp)); } catch (_) { return ''; }
+      }
+      function cryptoId() { return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2,9)}`; }
+
+      function renderSobre() {
+        setPage(`<div class="container page-wrap"><div class="page-top"><span class="eyebrow">Nossa história</span><h1>Uma voz familiar no meio do ruído.</h1><p>A Florida Transmissões é uma emissora fictícia criada para o universo narrativo do RPG/ARG. Para o público, uma rádio de bairro tranquila. Para quem presta atenção, talvez haja outras camadas no sinal.</p></div><div class="about-story"><div class="about-art"><i class="fa-solid fa-radio"></i><small>FLORIDA · 88.5 MHz · DESDE 1982</small></div><article class="about-copy"><span class="eyebrow">Desde 1982</span><h2>Memórias guardadas em fita.</h2><p>A história oficial conta que a Florida Transmissões nasceu em 1982, quando um pequeno grupo de entusiastas montou um transmissor artesanal para conectar bairros distantes. A programação cresceu junto com a cidade: música brasileira, notícias da comunidade e relatos enviados por ouvintes.</p><p>Com o tempo, o estúdio acumulou discos, cartas, fitas cassete e gravações que ninguém teve coragem de apagar. A equipe insiste que tudo não passa de arquivo histórico. Mesmo assim, alguns registros parecem repetir sons que não estavam presentes na gravação original.</p><p>Nosso compromisso público é simples: música sem pressa, histórias com espaço para respirar e uma frequência amiga em cada parte do dia.</p><div class="stats-grid"><div class="stat-box"><strong>88.5</strong><span>Frequência fictícia</span></div><div class="stat-box"><strong>1982</strong><span>Ano de fundação</span></div><div class="stat-box"><strong>3.000+</strong><span>Discos no acervo</span></div></div></article></div><div class="quote-band" style="margin-top:24px"><div><p>“Se o sinal falhar, não tente ajustar o aparelho. Às vezes, a frequência está tentando encontrar você.”</p><div class="mono" style="margin-top:15px">TRECHO NÃO OFICIAL · ORIGEM DESCONHECIDA</div></div><a href="#/programacao" class="btn btn-plain">Voltar ao dial <i class="fa-solid fa-arrow-right"></i></a></div></div>`);
+      }
+
+      function renderContato() {
+        setPage(`<div class="container page-wrap"><div class="page-top"><span class="eyebrow">Fale conosco</span><h1>Estamos na escuta.</h1><p>Envie uma mensagem para o estúdio fictício, compartilhe uma sugestão ou conte qual programa faz parte da sua rotina.</p></div><div class="two-col"><section class="form-card"><h2>Enviar uma mensagem</h2><p class="form-intro">Sua mensagem será salva localmente para demonstração.</p><form id="contato-form" novalidate><div class="field"><label for="contato-nome">NOME *</label><input id="contato-nome" name="nome" maxlength="80" required value="${escapeHTML(currentUser?.name||'')}" placeholder="Seu nome"></div><div class="field"><label for="contato-email">E-MAIL *</label><input id="contato-email" name="email" type="email" required value="${escapeHTML(currentUser?.email||'')}" placeholder="voce@exemplo.com"></div><div class="field"><label for="contato-assunto">ASSUNTO</label><select id="contato-assunto" name="assunto"><option>Dúvida</option><option>Sugestão de programa</option><option>Parceria comunitária</option><option>Relato sobre a transmissão</option><option>Outro assunto</option></select></div><div class="field"><label for="contato-mensagem">MENSAGEM *</label><textarea id="contato-mensagem" name="mensagem" maxlength="1200" required placeholder="Escreva sua mensagem…"></textarea></div><div class="form-error hidden" id="contato-error" role="alert"></div><button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar mensagem</button></form></section><aside><div class="info-card"><h2 style="font-size:1.3rem;margin-bottom:14px">O estúdio</h2><div class="contact-line"><i class="fa-solid fa-location-dot"></i><div><strong>Endereço fictício</strong><span>Av. das Camélias, 88 · Jardim, Florida/SP</span></div></div><div class="contact-line"><i class="fa-regular fa-envelope"></i><div><strong>E-mail narrativo</strong><span>estudio@florida.example</span></div></div><div class="contact-line"><i class="fa-regular fa-clock"></i><div><strong>Atendimento</strong><span>Segunda a sábado · 8h às 18h (ficcional)</span></div></div></div><div class="info-card"><div class="bullet-icon"><i class="fa-solid fa-radio"></i></div><h3>Uma observação sobre o sinal</h3><p>Se você chegou aqui depois de ouvir uma interferência, anote o horário e o programa que estava no ar. A equipe agradece a colaboração dos ouvintes.</p></div></aside></div></div>`);
+        $('#contato-form').addEventListener('submit', submitContato);
+      }
+      function submitContato(event) {
+        event.preventDefault(); const form=event.currentTarget, data=Object.fromEntries(new FormData(form).entries()), error=$('#contato-error');
+        if(!data.nome.trim()||!data.email.trim()||!data.mensagem.trim()){error.textContent='Preencha seu nome, e-mail e mensagem.';error.classList.remove('hidden');return;}
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){error.textContent='Digite um endereço de e-mail válido.';error.classList.remove('hidden');return;}
+        const messages=loadJSON(STORAGE.contatos,[]); messages.push({...data,id:cryptoId(),createdAt:Date.now()}); saveJSON(STORAGE.contatos,messages); toast('Mensagem registrada','A mensagem foi guardada neste navegador.','success'); form.reset();
+      }
+
+      function renderLogin() {
+        if (currentUser) { location.hash='#/perfil'; return; }
+        setPage(`<div class="container page-wrap"><div class="auth-shell"><section class="form-card auth-card"><div class="auth-mark"><i class="fa-solid fa-key"></i></div><h1>A casa conhece você?</h1><p class="subtitle">Entre para rever seus pedidos e guardar seus programas favoritos.</p><form id="login-form" novalidate><div class="field"><label for="login-email">USUÁRIO OU E-MAIL</label><input id="login-email" name="email" type="text" autocomplete="username" required placeholder="Seu usuário ou e-mail"></div><div class="field"><label for="login-password">SENHA</label><input id="login-password" name="password" type="password" autocomplete="current-password" required placeholder="Sua senha"></div><div id="login-error" class="form-error hidden" role="alert"></div><button class="btn btn-primary" style="width:100%" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Entrar na Florida</button></form><div class="auth-switch">Ainda não tem uma conta? <a href="#/cadastro">Criar cadastro</a></div><div class="demo-warning"><i class="fa-solid fa-circle-info"></i><span><strong>Modo demonstração:</strong> a conta fica salva apenas neste navegador. Não use uma senha real ou reutilizada. Para uso público, conecte um backend de autenticação seguro.</span></div></section></div></div>`);
+        $('#login-form').addEventListener('submit', submitLogin);
+      }
+      async function hashPassword(password) {
+        // SHA-256 when available; fallback only for standalone demo environments.
+        if (window.crypto?.subtle && window.isSecureContext) {
+          const bytes = new TextEncoder().encode(password); const digest = await crypto.subtle.digest('SHA-256', bytes);
+          return [...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('');
+        }
+        let h = 2166136261; for(let i=0;i<password.length;i++){h^=password.charCodeAt(i);h=Math.imul(h,16777619);} return `demo-${(h>>>0).toString(16)}`;
+      }
+      async function submitLogin(event) {
+        event.preventDefault(); const data=Object.fromEntries(new FormData(event.currentTarget).entries()), error=$('#login-error');
+        if(!data.email.trim()||!data.password){error.textContent='Informe seu e-mail e sua senha.';error.classList.remove('hidden');return;}
+        const normalized=data.email.trim().toLowerCase();
+        // Ficção narrativa: credenciais obtidas pelos dois minigames ocultos.
+        if(normalized===getArgCredential('user').toLowerCase() && data.password===getArgCredential('pass')) { isLabMode=true;sessionStorage.setItem('florida_v2_lab','true');toast('Sinal de pesquisa autorizado','Acesso ficcional liberado.','success');location.hash='#/arquivo-restrito';return; }
+        const user=getUsers().find(u=>u.email===normalized); const digest=await hashPassword(data.password);
+        if(!user||user.passwordHash!==digest){error.textContent='E-mail ou senha incorretos. Confira os dados e tente novamente.';error.classList.remove('hidden');return;}
+        setCurrentUser({email:user.email,name:user.name,createdAt:user.createdAt});toast('Bem-vindo de volta',`Olá, ${user.name}. A frequência está à sua espera.`,'success');location.hash='#/perfil';
+      }
+      function renderCadastro() {
+        if(currentUser){location.hash='#/perfil';return;}
+        setPage(`<div class="container page-wrap"><div class="auth-shell"><section class="form-card auth-card"><div class="auth-mark"><i class="fa-solid fa-seedling"></i></div><h1>Entre para a comunidade.</h1><p class="subtitle">Crie uma conta de demonstração para organizar sua experiência.</p><form id="register-form" novalidate><div class="field"><label for="register-name">NOME DE EXIBIÇÃO</label><input id="register-name" name="name" maxlength="70" autocomplete="name" required placeholder="Como podemos chamar você?"></div><div class="field"><label for="register-email">E-MAIL</label><input id="register-email" name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com"></div><div class="field"><label for="register-password">SENHA</label><input id="register-password" name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="Pelo menos 8 caracteres"></div><div class="field"><label for="register-confirm">CONFIRMAR SENHA</label><input id="register-confirm" name="confirm" type="password" autocomplete="new-password" minlength="8" required placeholder="Repita a senha"></div><div class="form-error hidden" id="register-error" role="alert"></div><button class="btn btn-primary" type="submit" style="width:100%"><i class="fa-solid fa-user-plus"></i> Criar minha conta</button></form><div class="auth-switch">Já faz parte da comunidade? <a href="#/login">Entrar na conta</a></div><div class="demo-warning"><i class="fa-solid fa-triangle-exclamation"></i><span>Esta é uma autenticação demonstrativa. Os dados ficam no armazenamento local do navegador, não em um servidor. Use uma senha exclusiva para este teste.</span></div></section></div></div>`);
+        $('#register-form').addEventListener('submit', submitRegister);
+      }
+      async function submitRegister(event) {
+        event.preventDefault();const data=Object.fromEntries(new FormData(event.currentTarget).entries()),error=$('#register-error');
+        if(data.name.trim().length<2){error.textContent='Digite um nome com pelo menos dois caracteres.';error.classList.remove('hidden');return;}
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){error.textContent='Digite um endereço de e-mail válido.';error.classList.remove('hidden');return;}
+        if(data.password.length<8){error.textContent='Use uma senha com pelo menos oito caracteres.';error.classList.remove('hidden');return;}
+        if(data.password!==data.confirm){error.textContent='As senhas não são iguais.';error.classList.remove('hidden');return;}
+        const email=data.email.trim().toLowerCase(),users=getUsers();if(users.some(u=>u.email===email)){error.textContent='Já existe uma conta com esse e-mail neste navegador.';error.classList.remove('hidden');return;}
+        const user={email,name:data.name.trim(),passwordHash:await hashPassword(data.password),createdAt:Date.now()};users.push(user);saveJSON(STORAGE.users,users);setCurrentUser({email:user.email,name:user.name,createdAt:user.createdAt});toast('Conta criada!',`Bem-vindo à Florida, ${user.name}.`,'success');location.hash='#/perfil';
+      }
+      function renderPerfil() {
+        if(!currentUser){location.hash='#/login';return;}
+        const all=getPedidos().filter(p=>p.email===currentUser.email).sort((a,b)=>b.createdAt-a.createdAt);
+        const myFavs=getFavorites();
+        setPage(`<div class="container page-wrap"><div class="page-top"><span class="eyebrow">Sua conta</span><h1>Bom ter você por aqui.</h1><p>Este é seu canto da Florida. Seus pedidos e preferências são armazenados neste navegador.</p></div><section class="panel profile-head"><div class="avatar-large">${escapeHTML(initials(currentUser.name))}</div><div><h2>${escapeHTML(currentUser.name)}</h2><p>${escapeHTML(currentUser.email)} · Ouvinte da Florida</p><p>Membro desde ${formatDate(currentUser.createdAt||Date.now())}</p></div><div class="profile-actions"><button class="btn btn-plain btn-small" data-action="edit-profile"><i class="fa-regular fa-pen-to-square"></i> Editar perfil</button><button class="btn btn-danger btn-small" data-action="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button></div></section><section class="panel"><div class="panel-head"><h2><i class="fa-solid fa-music" style="color:var(--sage-deep);margin-right:8px"></i>Meus pedidos musicais</h2><a class="btn btn-soft btn-small" href="#/pedidos">Novo pedido <i class="fa-solid fa-arrow-right"></i></a></div>${all.length?all.map(p=>`<div class="request-row"><div><strong>${escapeHTML(p.musica)} — ${escapeHTML(p.artista)}</strong><p>${escapeHTML(p.tipo)} · ${formatDate(p.createdAt)}${p.mensagem?`<br>“${escapeHTML(p.mensagem)}”`:''}</p></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px"><span class="status-label ${p.status==='Atendido'?'atendido':p.status==='Cancelado'?'cancelado':''}">${escapeHTML(p.status)}</span><button class="favorite-btn" data-action="delete-pedido" data-id="${escapeHTML(p.id)}" type="button"><i class="fa-regular fa-trash-can"></i> Excluir</button></div></div>`).join(''):'<div class="empty-state"><i class="fa-solid fa-music"></i><strong>Nenhum pedido por enquanto</strong><span>Quando enviar um pedido, ele vai aparecer aqui.</span><p style="margin:15px 0 0"><a href="#/pedidos" class="btn btn-primary btn-small">Fazer primeiro pedido</a></p></div>'}</section><section class="panel"><div class="panel-head"><h2><i class="fa-regular fa-heart" style="color:var(--rose);margin-right:8px"></i>Programas favoritos</h2><a href="#/programacao" class="text-link">Explorar grade <i class="fa-solid fa-arrow-right"></i></a></div>${myFavs.length?`<div class="feature-grid">${myFavs.map(name=>programs.find(p=>p.title===name)).filter(Boolean).map(p=>`<article class="feature-card"><div class="feature-icon"><i class="fa-solid ${p.icon}"></i></div><h3>${escapeHTML(p.title)}</h3><p>${escapeHTML(p.time)}–${escapeHTML(p.end)} · ${escapeHTML(p.category)}</p><button class="favorite-btn favorited" data-action="favorite" data-title="${escapeHTML(p.title)}"><i class="fa-solid fa-heart"></i> Remover favorito</button></article>`).join('')}</div>`:emptyState('fa-heart','Ainda sem favoritos','Marque o coração em um programa da grade para vê-lo aqui.')}</section></div>`);
+      }
+
+      function renderNotFound() { setPage(`<div class="container page-wrap" style="text-align:center"><div class="auth-mark"><i class="fa-solid fa-compass"></i></div><h1 class="display" style="font-size:2.4rem">Frequência não encontrada.</h1><p class="muted" style="max-width:460px;margin:10px auto 24px">O caminho que você tentou sintonizar não está disponível. Talvez o sinal tenha mudado de lugar.</p><a class="btn btn-primary" href="#/"><i class="fa-solid fa-arrow-left"></i> Voltar ao início</a></div>`); }
+
+      function renderSecret() {
+        stopAudio();
+        $('#modal-root').innerHTML='';
+        $('#toast-container').innerHTML='';
+        document.body.className='secret-body';
+        header.classList.add('hidden');
+        footer.classList.add('hidden');
+        appContent.innerHTML=`<section class="secret-screen" aria-label=""><div><h1 class="secret-message">Não há cordões em mim</h1><p class="secret-clue">Nem todo sinal está no ar. A folha no alto escuta depois de onze toques.</p></div></section>`;
+      }
+      function renderLab() {
+        document.body.className='lab-body';header.classList.add('hidden');footer.classList.add('hidden');
+        const route=routeName();
+        if(!isLabMode){toast('Acesso negado','O terminal de pesquisa exige uma sessão autorizada.','error');location.hash='#/login';return;}
+        if(route==='/arquivo-restrito/experimento-g'||route==='/arquivo-restrito/experimento-o'){
+          const exp=route.endsWith('g')?'G':'O';
+          appContent.innerHTML=`<div class="lab-wrap"><div class="container" style="max-width:760px;padding-top:10vh"><section class="lab-card" style="border-color:#662e32;text-align:center;padding:clamp(25px,5vw,45px)"><i class="fa-solid fa-shield-halved" style="font-size:2.4rem;color:#e36d73"></i><p style="color:#df777b;letter-spacing:.15em;margin-top:20px">BLOQUEIO DE SEGURANÇA · EXP-${exp==='G'?'001-G':'002-O'}</p><h1 style="color:#edf7eb;font-size:1.5rem">Acesso negado.</h1><p style="color:#8b9990;line-height:1.8">Este experimento exige nível mestre. Sua sessão atual não possui a autorização necessária.</p><a href="#/arquivo-restrito" class="secret-btn" style="display:inline-block;margin-top:15px"><i class="fa-solid fa-arrow-left"></i> Voltar ao arquivo</a></section></div></div>`;return;
+        }
+        if(route==='/arquivo-restrito/experimento-c') {renderExperimentC();return;}
+        appContent.innerHTML=`<div class="lab-wrap"><div class="container"><div class="lab-head"><div><div style="color:#5f8669;font-size:.65rem;letter-spacing:.16em">SISTEMA DE PESQUISA RESTRITO</div><h1>ARQUIVO DE EXPERIMENTOS</h1></div><div><span class="lab-tag">SESSÃO: ADMIN_EXP_003</span><button class="secret-btn" style="margin-left:8px" data-action="lab-logout">LOGOUT</button></div></div><div class="feature-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><a href="#/arquivo-restrito/experimento-g" class="lab-card"><i class="fa-solid fa-folder" style="font-size:2rem;color:#e2b65e"></i><h2>Experimento G</h2><p>ID: EXP-001-G · ACESSO NÍVEL MESTRE</p><span class="lab-tag" style="color:#d9777c">RESTRITO</span></a><a href="#/arquivo-restrito/experimento-c" class="lab-card"><i class="fa-solid fa-folder-open" style="font-size:2rem;color:#6dd18c"></i><h2>Experimento C</h2><p>ID: EXP-003-C · CORPO SECO</p><span class="lab-tag">ARQUIVO DISPONÍVEL</span></a><a href="#/arquivo-restrito/experimento-o" class="lab-card"><i class="fa-solid fa-folder" style="font-size:2rem;color:#e2b65e"></i><h2>Experimento O</h2><p>ID: EXP-002-O · ACESSO NÍVEL MESTRE</p><span class="lab-tag" style="color:#d9777c">RESTRITO</span></a></div><div class="lab-card" style="margin-top:20px;font-size:.7rem;color:#64846b;line-height:1.9"><p>&gt; LOG_SISTEMA: Conexão local ativa via protocolo analógico 88.5 MHz.</p><p>&gt; AVISO: Este terminal é um elemento ficcional do ARG. A autorização é simulada no navegador.</p><p>&gt; ARQUIVO_RECUPERADO: Uma frequência não é necessariamente um som.</p></div></div></div>`;
+      }
+      function renderExperimentC() {
+        const logs=[
+          '#1: Apesar de ser uma criatura feita para punição, ela aparenta uma ideologia de liberdade incomum.',
+          '#2: Está reagindo bem aos estímulos. Talvez consigamos replicar o padrão G usando este espécime.',
+          '#3: Repete “Não há cordões em mim”. Identificamos casulos protetores e uma estrutura semelhante a um espinho. A função permanece desconhecida.',
+          '#4: Impressionante. Parece capaz de se implantar em outro organismo e renascer a partir dele. A hipótese de imortalidade ainda não foi confirmada.',
+          '#5: Apesar da regeneração, determinadas frequências parecem interromper sua atividade por completo.',
+          '#6: Último registro antes do encerramento do projeto. Vou libertá-lo na floresta. Talvez, longe daqui, consiga evoluir e sair. Adeus.'
+        ];
+        appContent.innerHTML=`<div class="lab-wrap"><div class="container" style="max-width:900px"><div class="lab-head"><div><a href="#/arquivo-restrito" style="font-size:.7rem;color:#7b9d80"><i class="fa-solid fa-chevron-left"></i> VOLTAR AO PAINEL</a><h1 style="margin-bottom:3px">EXPERIMENTO C: CORPO SECO</h1><p style="font-size:.65rem;color:#5e8768">REGISTRO DE PESQUISA ID: EXP-003-C</p></div><span class="lab-tag">STATUS: RELEASED</span></div><section class="lab-card" style="margin-bottom:24px"><p style="letter-spacing:.13em;color:#72d18a;font-size:.65rem">DESCRIÇÃO DO OBJETO DE ESTUDO</p><p style="font-size:.79rem;line-height:2;color:#b4c4b7">Uma vida humana cuja motivação parecia voltada à destruição de tudo ao redor. O acúmulo de negatividade teria originado uma maldição observada por aqueles que testemunharam suas ações.</p><p style="font-size:.79rem;line-height:2;color:#b4c4b7">O Corpo-seco, surgido a partir dessa maldição, seria a manifestação física de uma forma etérea conhecida como Bradador. Ambos seriam a alma e a essência de uma pessoa cuja punição, segundo os registros, ultrapassaria a compreensão humana.</p></section><p style="font-size:.68rem;color:#d4ad63;letter-spacing:.14em;margin-bottom:12px">REGISTROS DE OBSERVAÇÃO / LOGS</p><div style="display:grid;gap:9px">${logs.map(l=>`<div class="lab-card" style="font-size:.75rem;line-height:1.9;color:#bbc8bd">${escapeHTML(l)}</div>`).join('')}</div><p style="text-align:center;color:#48664e;font-size:.6rem;margin-top:25px;letter-spacing:.1em">FIM DO ARQUIVO EXPERIMENTO C · NENHUM OUTRO REGISTRO DISPONÍVEL</p></div></div>`;
+      }
+
+      function router(_hash, rerender = false) {
+        const route=routeName();
+        closeMobileMenu();
+        if(route==='/jardim-das-frequencias'){renderSecret();return;}
+        if(route.startsWith('/arquivo-restrito')){renderLab();return;}
+        layoutPublic();updateNav(route);
+        switch(route){
+          case '/': renderHome();break; case '/programacao':renderProgramacao();break;case '/pedidos':renderPedidos();break;case '/sobre':renderSobre();break;case '/contato':renderContato();break;case '/login':renderLogin();break;case '/cadastro':renderCadastro();break;case '/perfil':renderPerfil();break;default:renderNotFound();
+        }
+        if(!rerender) window.scrollTo({top:0,behavior:'smooth'});
+      }
+      function closeMobileMenu() { $('#mobile-nav').classList.remove('open'); $('#mobile-menu-btn').setAttribute('aria-expanded','false'); $('#mobile-menu-icon').className='fa-solid fa-bars'; }
+
+      // Radio engine: a gentle synthesized tuning bed is available without a station server.
+      // A real stream can be configured through the player settings.
+      function buildAudioEngine() {
+        if(!audioContext) {
+          const AC=window.AudioContext||window.webkitAudioContext;
+          if(!AC) throw new Error('Este navegador não oferece suporte à Web Audio API.');
+          audioContext=new AC(); masterGain=audioContext.createGain(); masterGain.gain.value=0; masterGain.connect(audioContext.destination);
+          noiseFilter=audioContext.createBiquadFilter();noiseFilter.type='lowpass';noiseFilter.frequency.value=950;noiseFilter.Q.value=.5;noiseFilter.connect(masterGain);
+          [[110,.06],[164.81,.025],[220,.018]].forEach(([freq,gain])=>{const osc=audioContext.createOscillator(),g=audioContext.createGain();osc.type='sine';osc.frequency.value=freq;g.gain.value=gain;osc.connect(g);g.connect(masterGain);osc.start();oscillators.push(osc);});
+        }
+        // A stopped BufferSource cannot be restarted. Rebuild just that node after each pause.
+        if(!noiseSource) {
+          const size=audioContext.sampleRate*2,buffer=audioContext.createBuffer(1,size,audioContext.sampleRate),data=buffer.getChannelData(0);
+          for(let i=0;i<size;i++)data[i]=(Math.random()*2-1)*.16;
+          noiseSource=audioContext.createBufferSource();noiseSource.buffer=buffer;noiseSource.loop=true;
+          const noiseGain=audioContext.createGain();noiseGain.gain.value=.08;noiseSource.connect(noiseGain);noiseGain.connect(noiseFilter);
+        }
+      }
+      async function startAudio() {
+        const playBtn=$('#radio-play'),icon=$('#radio-play-icon'),status=$('#radio-status');
+        try {
+          if(streamUrl){
+            audioElement.src=streamUrl;audioElement.volume=audioMuted?0:Number($('#radio-volume')?.value??35)/100;await audioElement.play();activeAudioMode='stream';
+            status.textContent='Transmissão externa conectada';
+          } else {
+            buildAudioEngine();if(audioContext.state==='suspended')await audioContext.resume();
+            masterGain.gain.setTargetAtTime((audioMuted?0:Number($('#radio-volume')?.value??35)/100)*.25,audioContext.currentTime,.05);
+            noiseSource.start();activeAudioMode='synth';status.textContent='Sintonia de demonstração ativa';
+          }
+          if(playBtn)playBtn.setAttribute('aria-label','Pausar rádio');if(icon)icon.className='fa-solid fa-pause';$('#record-disc')?.classList.add('playing');$('#sound-wave')?.classList.add('active');toast('Sintonia ativa',activeAudioMode==='stream'?'Reproduzindo o stream configurado.':'Reproduzindo uma paisagem sonora sintética.','success');
+        } catch(error) {
+          activeAudioMode='off';if(status)status.textContent='Não foi possível iniciar o áudio';if(icon)icon.className='fa-solid fa-play';toast('Falha na transmissão',error?.message?.includes('NotSupported')?'O endereço não contém um stream de áudio compatível.':'O áudio não iniciou. Verifique o endereço do stream ou tente novamente.','error');
+        }
+      }
+      function stopAudio() {
+        if(activeAudioMode==='stream'){audioElement.pause();audioElement.removeAttribute('src');audioElement.load();}
+        if(activeAudioMode==='synth'&&noiseSource){try{noiseSource.stop();}catch(_){}noiseSource=null;if(masterGain&&audioContext)masterGain.gain.setTargetAtTime(0,audioContext.currentTime,.03);}
+        activeAudioMode='off';$('#radio-play')?.setAttribute('aria-label','Iniciar rádio');$('#radio-play-icon') && ($('#radio-play-icon').className='fa-solid fa-play');$('#record-disc')?.classList.remove('playing');$('#sound-wave')?.classList.remove('active');const status=$('#radio-status');if(status)status.textContent=streamUrl?'Stream configurado · clique para ouvir':'Sintonia pronta · clique para ouvir';
+      }
+      function toggleRadio() { if(activeAudioMode==='off') startAudio(); else {stopAudio();toast('Rádio pausada','A reprodução foi interrompida.','info');} }
+      function updateVolume(value) {
+        const n=Math.max(0,Math.min(100,Number(value)||0));$('#volume-label') && ($('#volume-label').textContent=`${n}%`);
+        if(masterGain&&activeAudioMode==='synth')masterGain.gain.setTargetAtTime((audioMuted?0:n/100)*.25,audioContext.currentTime,.04);
+        audioElement.volume=audioMuted?0:n/100;
+      }
+      function bindHomePlayer() {
+        $('#radio-play')?.addEventListener('click',toggleRadio);$('#radio-volume')?.addEventListener('input',e=>updateVolume(e.target.value));
+        const current=getCurrentProgram();$('#current-program-title').textContent=current.title;$('#current-program-sub').textContent=`${current.category} · ${current.time}–${current.end}`;
+        if(streamUrl)$('#radio-status').textContent='Stream externo configurado · clique para ouvir';
+        if(activeAudioMode!=='off'){$('#radio-play')?.setAttribute('aria-label','Pausar rádio');$('#radio-play-icon') && ($('#radio-play-icon').className='fa-solid fa-pause');$('#record-disc')?.classList.add('playing');$('#sound-wave')?.classList.add('active');if($('#radio-status'))$('#radio-status').textContent=activeAudioMode==='stream'?'Transmissão externa conectada':'Sintonia de demonstração ativa';}
+      }
+      function openRadioSettings() {
+        $('#modal-root').innerHTML=`<div class="modal-backdrop" data-action="close-modal"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="radio-modal-title"><div class="modal-head"><h2 id="radio-modal-title">Configurar transmissão</h2><button class="icon-btn" data-action="close-modal" type="button" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div><p>O player já funciona em modo de sintonia sintética. Para tocar uma rádio de verdade, informe uma URL direta de stream compatível com o navegador (normalmente termina em .mp3, .aac ou é um endpoint de áudio).</p><form id="stream-form"><div class="field"><label for="stream-url">URL DO STREAM DE ÁUDIO</label><input id="stream-url" name="url" type="url" placeholder="https://exemplo.com/radio.mp3" value="${escapeHTML(streamUrl)}"><small>Use somente uma fonte confiável. Páginas comuns de sites ou links de vídeo não funcionam como stream direto.</small></div><div class="form-actions"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Salvar endereço</button><button class="btn btn-plain" type="button" data-action="clear-stream">Usar sintonia sintética</button></div></form><div class="demo-warning"><i class="fa-solid fa-circle-info"></i><span>Não há uma URL musical oficial fornecida para a emissora fictícia. O endereço salvo fica somente neste navegador.</span></div></section></div>`;
+        $('#stream-form').addEventListener('submit',event=>{event.preventDefault();const url=$('#stream-url').value.trim();if(url&&!/^https?:\/\//i.test(url)){toast('Endereço inválido','A URL precisa começar com http:// ou https://.','error');return;}streamUrl=url;if(url)localStorage.setItem(STORAGE.stream,url);else localStorage.removeItem(STORAGE.stream);stopAudio();$('#modal-root').innerHTML='';toast(url?'Stream salvo':'Sintonia sintética selecionada',url?'O player tentará usar esse endereço na próxima reprodução.':'O player usará o áudio sintético local.','success');if(routeName()==='/')bindHomePlayer();});
+      }
+
+      function getArgCredential(kind) {
+        // Encoded here so the credential strings do not appear plainly in the page source.
+        const codes = kind === 'user'
+          ? [102,108,111,114,105,100,97,65,68,77,65,67]
+          : [102,108,111,114,105,100,97,56,56,53,102,109];
+        return String.fromCharCode(...codes);
+      }
+      function openArgGame(kind) {
+        argGameState = kind === 'user'
+          ? { kind:'user', step:0, solved:false }
+          : { kind:'pass', bits:Array(8).fill(0), solved:false };
+        if(kind === 'user') {
+          $('#modal-root').innerHTML=`<div class="arg-game-backdrop" data-action="close-modal"><section class="arg-terminal" role="dialog" aria-modal="true" aria-labelledby="arg-game-title"><div class="arg-terminal-head"><div><div class="arg-kicker">PROTOCOLO DE RECUPERAÇÃO · 01</div><h2 id="arg-game-title">REORDENAÇÃO DE PACOTES</h2></div><button class="icon-btn" data-action="close-modal" aria-label="Fechar terminal"><i class="fa-solid fa-xmark"></i></button></div><p>Reordene os quatro pacotes do menor para o maior valor hexadecimal. Selecione cada pacote na ordem correta para reconstruir o identificador de acesso.</p><div class="arg-packets"><button type="button" class="arg-packet" data-action="arg-packet" data-packet="1C">0x1C</button><button type="button" class="arg-packet" data-action="arg-packet" data-packet="03">0x03</button><button type="button" class="arg-packet" data-action="arg-packet" data-packet="0A">0x0A</button><button type="button" class="arg-packet" data-action="arg-packet" data-packet="07">0x07</button></div><div class="arg-status" id="arg-game-status" aria-live="polite">PACOTES RECEBIDOS: 0/4</div><div id="arg-game-result"></div></section></div>`;
+        } else {
+          $('#modal-root').innerHTML=`<div class="arg-game-backdrop" data-action="close-modal"><section class="arg-terminal" role="dialog" aria-modal="true" aria-labelledby="arg-game-title"><div class="arg-terminal-head"><div><div class="arg-kicker">PROTOCOLO DE RECUPERAÇÃO · 02</div><h2 id="arg-game-title">RECONSTRUÇÃO DE CHECKSUM</h2></div><button class="icon-btn" data-action="close-modal" aria-label="Fechar terminal"><i class="fa-solid fa-xmark"></i></button></div><p>Some os dois opcodes e informe o resultado em binário usando exatamente oito bits.</p><div class="arg-code-box">OPCODE A: <strong>0x2B</strong><br>OPCODE B: <strong>0x2D</strong><br>OPERAÇÃO: <strong>A + B</strong></div><div class="arg-bits" id="arg-bits">${argGameState.bits.map((bit,i)=>`<button type="button" class="arg-bit" data-action="arg-bit" data-index="${i}" aria-label="Bit ${i+1}, valor ${bit}" aria-pressed="false">${bit}</button>`).join('')}</div><div class="arg-bits-display" id="arg-bits-display">00000000</div><div class="arg-status" id="arg-game-status" aria-live="polite">CHECKSUM AGUARDANDO ENTRADA</div><div class="arg-game-actions"><button class="btn btn-primary" type="button" data-action="arg-verify-binary"><i class="fa-solid fa-shield-halved"></i> Verificar checksum</button><button class="btn btn-plain" type="button" data-action="arg-reset-binary">Limpar bits</button></div><div id="arg-game-result"></div></section></div>`;
+        }
+      }
+      function setArgGameStatus(message, error=false) {
+        const status=$('#arg-game-status');
+        if(status){status.textContent=message;status.classList.toggle('error',error);}
+      }
+      function completeArgGame() {
+        if(!argGameState || argGameState.solved)return;
+        argGameState.solved=true;
+        const credential=getArgCredential(argGameState.kind);
+        const label=argGameState.kind==='user'?'IDENTIFICADOR RECUPERADO':'CHAVE DE ACESSO RECUPERADA';
+        $('#arg-game-result').innerHTML=`<div class="arg-result"><strong>${label}</strong><div class="arg-credential" id="arg-credential-value">${escapeHTML(credential)}</div><div class="arg-game-actions"><button class="btn btn-soft" type="button" data-action="copy-arg-credential"><i class="fa-regular fa-copy"></i> Copiar</button><button class="btn btn-plain" type="button" data-action="close-modal">Fechar</button></div></div>`;
+        setArgGameStatus('ACESSO RECUPERADO. PACOTE VALIDADO.');
+        $$('.arg-packet').forEach(button=>button.disabled=true);
+        $$('.arg-bit').forEach(button=>button.disabled=true);
+      }
+      function processArgPacket(packet) {
+        if(!argGameState || argGameState.kind!=='user' || argGameState.solved)return;
+        const expected=['03','07','0A','1C'];
+        if(packet===expected[argGameState.step]) {
+          argGameState.step++;
+          const button=$(`.arg-packet[data-packet="${packet}"]`);
+          if(button){button.classList.add('used');button.disabled=true;}
+          if(argGameState.step===expected.length){completeArgGame();return;}
+          setArgGameStatus(`PACOTES RECEBIDOS: ${argGameState.step}/4`);
+        } else {
+          argGameState.step=0;
+          $$('.arg-packet').forEach(button=>{button.classList.remove('used');button.disabled=false;});
+          setArgGameStatus('SEQUÊNCIA REJEITADA. PACOTES REINICIADOS.',true);
+        }
+      }
+      function toggleArgBit(index) {
+        if(!argGameState || argGameState.kind!=='pass' || argGameState.solved)return;
+        if(index<0||index>7)return;
+        argGameState.bits[index]=argGameState.bits[index] ? 0 : 1;
+        const button=$(`.arg-bit[data-index="${index}"]`);
+        if(button){const bit=argGameState.bits[index];button.textContent=String(bit);button.classList.toggle('is-one',bit===1);button.setAttribute('aria-pressed',String(bit===1));button.setAttribute('aria-label',`Bit ${index+1}, valor ${bit}`);}
+        $('#arg-bits-display').textContent=argGameState.bits.join('');
+        setArgGameStatus('ENTRADA ATUALIZADA. CHECKSUM AGUARDANDO VERIFICAÇÃO.');
+      }
+      function verifyArgBinary() {
+        if(!argGameState || argGameState.kind!=='pass' || argGameState.solved)return;
+        if(argGameState.bits.join('')==='01011000')completeArgGame();
+        else setArgGameStatus('CHECKSUM INVÁLIDO. ENTRADA NÃO ACEITA.',true);
+      }
+      async function copyArgCredential() {
+        const value=$('#arg-credential-value')?.textContent;
+        if(!value)return;
+        try { await navigator.clipboard.writeText(value); toast('Copiado','O valor recuperado foi copiado.','success'); }
+        catch(_) { toast('Valor recuperado',value,'info'); }
+      }
+
+      function logout() {
+        setCurrentUser(null);isLabMode=false;sessionStorage.removeItem('florida_v2_lab');toast('Sessão encerrada','Você saiu da sua conta.','info');location.hash='#/';
+      }
+      function editProfile() {
+        if(!currentUser)return;
+        $('#modal-root').innerHTML=`<div class="modal-backdrop" data-action="close-modal"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="edit-profile-title"><div class="modal-head"><h2 id="edit-profile-title">Editar perfil</h2><button class="icon-btn" data-action="close-modal" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div><form id="edit-profile-form"><div class="field"><label for="edit-name">NOME DE EXIBIÇÃO</label><input id="edit-name" name="name" required minlength="2" maxlength="70" value="${escapeHTML(currentUser.name)}"></div><div class="field"><label>E-MAIL</label><input disabled value="${escapeHTML(currentUser.email)}"><small>O e-mail não pode ser alterado neste protótipo.</small></div><div class="form-actions"><button class="btn btn-primary" type="submit">Salvar alterações</button><button class="btn btn-plain" type="button" data-action="close-modal">Cancelar</button></div></form></section></div>`;
+        $('#edit-profile-form').addEventListener('submit',event=>{event.preventDefault();const name=$('#edit-name').value.trim();if(name.length<2){toast('Nome muito curto','Use pelo menos dois caracteres.','error');return;}const users=getUsers().map(u=>u.email===currentUser.email?{...u,name}:u);saveJSON(STORAGE.users,users);setCurrentUser({...currentUser,name});$('#modal-root').innerHTML='';toast('Perfil atualizado','Seu nome de exibição foi alterado.','success');router('#/perfil',true);});
+      }
+      function showProgramInfo(title) {
+        const p=programs.find(item=>item.title===title);
+        if(!p)return;
+        const titleMarkup=p.secret
+          ? `<a href="#/jardim-das-frequencias" class="program-detail-title-link">${escapeHTML(p.title)}</a>`
+          : escapeHTML(p.title);
+        $('#modal-root').innerHTML=`<div class="modal-backdrop" data-action="close-modal"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="program-detail-title"><div class="modal-head"><h2 id="program-detail-title">${titleMarkup}</h2><button class="icon-btn" data-action="close-modal" aria-label="Fechar detalhes"><i class="fa-solid fa-xmark"></i></button></div><div class="eyebrow">${escapeHTML(p.time)} — ${escapeHTML(p.end)}</div><p>${escapeHTML(p.desc)}</p><div class="program-meta"><span class="tag"><i class="fa-solid ${p.icon}"></i> ${escapeHTML(p.category)}</span><span class="tag"><i class="fa-regular fa-clock"></i> ${escapeHTML(p.time)}–${escapeHTML(p.end)}</span></div><div class="form-actions" style="margin-top:22px"><button class="btn btn-primary" data-action="favorite" data-title="${escapeHTML(p.title)}"><i class="${isFavorite(p.title)?'fa-solid':'fa-regular'} fa-heart"></i> ${isFavorite(p.title)?'Remover dos favoritos':'Adicionar aos favoritos'}</button><button class="btn btn-plain" data-action="close-modal">Fechar</button></div></section></div>`;
+      }
+      function deletePedido(id) { const before=getPedidos(), item=before.find(p=>p.id===id);if(!item||item.email!==currentUser?.email){toast('Não foi possível excluir','Este pedido não pertence à conta atual.','error');return;}saveJSON(STORAGE.pedidos,before.filter(p=>p.id!==id));toast('Pedido excluído','O registro foi removido deste navegador.','success');router('#/perfil',true); }
+      function clearLocalData() { if(!confirm('Apagar os pedidos, contatos, contas e preferências salvos neste navegador? Esta ação não pode ser desfeita.'))return;Object.values(STORAGE).forEach(key=>localStorage.removeItem(key));setCurrentUser(null);streamUrl='';toast('Dados locais apagados','O navegador foi limpo para este projeto.','success');location.hash='#/'; }
+
+      document.addEventListener('click',event=>{
+        const target=event.target.closest('[data-action]');if(!target)return;const action=target.dataset.action;
+        if(action==='logout')logout();
+        else if(action==='favorite') {const title=target.dataset.title;if(title)toggleFavorite(title);}
+        else if(action==='program-info')showProgramInfo(target.dataset.title);
+        else if(action==='radio-settings')openRadioSettings();
+        else if(action==='edit-profile')editProfile();
+        else if(action==='delete-pedido')deletePedido(target.dataset.id);
+        else if(action==='close-modal') {if(target.classList.contains('modal-backdrop')||target.classList.contains('arg-game-backdrop')){if(event.target!==target)return;$('#modal-root').innerHTML='';}else if(target.tagName==='BUTTON'||target.closest('.modal')===null){$('#modal-root').innerHTML='';}}
+        else if(action==='clear-stream'){streamUrl='';localStorage.removeItem(STORAGE.stream);stopAudio();$('#modal-root').innerHTML='';if(routeName()==='/')bindHomePlayer();toast('Sintonia sintética selecionada','A transmissão externa foi removida.','success');}
+        else if(action==='arg-packet')processArgPacket(target.dataset.packet);
+        else if(action==='arg-bit')toggleArgBit(Number(target.dataset.index));
+        else if(action==='arg-verify-binary')verifyArgBinary();
+        else if(action==='arg-reset-binary'){if(argGameState?.kind==='pass'&&!argGameState.solved){argGameState.bits=Array(8).fill(0);$$('.arg-bit').forEach(button=>{button.textContent='0';button.classList.remove('is-one');button.setAttribute('aria-pressed','false');button.disabled=false;});$('#arg-bits-display').textContent='00000000';setArgGameStatus('CHECKSUM AGUARDANDO ENTRADA');}}
+        else if(action==='copy-arg-credential')copyArgCredential();
+        else if(action==='lab-logout'){isLabMode=false;sessionStorage.removeItem('florida_v2_lab');location.hash='#/';toast('Terminal desconectado','Sessão de pesquisa encerrada.','info');}
+      });
+      // Entradas ocultas dos minigames: não exibem contadores, instruções ou qualquer dica na interface pública.
+      document.addEventListener('click',event=>{
+        const mark=event.target.closest('#site-header .brand-mark');
+        if(mark){
+          logoTapCount++;
+          clearTimeout(logoTapTimer);
+          logoTapTimer=setTimeout(()=>{logoTapCount=0;},7000);
+          if(logoTapCount>=11){event.preventDefault();logoTapCount=0;clearTimeout(logoTapTimer);openArgGame('user');}
+        }
+        const year=event.target.closest('#footer-year');
+        if(year){
+          yearTapCount++;
+          clearTimeout(yearTapTimer);
+          yearTapTimer=setTimeout(()=>{yearTapCount=0;},9000);
+          if(yearTapCount>=13){yearTapCount=0;clearTimeout(yearTapTimer);openArgGame('pass');}
+        }
+      });
+      $('#mobile-menu-btn').addEventListener('click',()=>{const nav=$('#mobile-nav'),open=nav.classList.toggle('open');$('#mobile-menu-btn').setAttribute('aria-expanded',String(open));$('#mobile-menu-icon').className=open?'fa-solid fa-xmark':'fa-solid fa-bars';});
+      $('#theme-toggle').addEventListener('click',()=>{const isDark=document.body.classList.toggle('dark-theme');localStorage.setItem(STORAGE.theme,isDark?'dark':'light');$('#theme-toggle i').className=isDark?'fa-solid fa-sun':'fa-solid fa-moon';});
+      window.addEventListener('hashchange',()=>{router();});
+      window.addEventListener('beforeunload',()=>{if(activeAudioMode==='synth')stopAudio();});
+      $('#footer-year').textContent=new Date().getFullYear();
+      if(localStorage.getItem(STORAGE.theme)==='dark'){document.body.classList.add('dark-theme');$('#theme-toggle i').className='fa-solid fa-sun';}
+      renderAuthHeader();router();
+
+      // Make a few utilities available for debugging the fictional project in the browser console.
+      window.FloridaTransmissoes = { clearLocalData, getCurrentProgram:()=>getCurrentProgram().title, getStorageKeys:()=>({...STORAGE}) };
+    })();
+  </script>
+</body>
+</html>
